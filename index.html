@@ -3,116 +3,192 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Uktics - SaaS Landing Page</title>
+    <title>Modernized Page</title>
     <style>
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #121212;
-            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(270deg, #1a1a1a, #333333);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            color: white;
+            overflow-x: hidden;
         }
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px;
-            background-color: #1e1e1e;
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
-        .navbar a {
-            color: #ffffff;
-            text-decoration: none;
-            margin: 0 15px;
+        .grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(0deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            pointer-events: none;
+        }
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            filter: blur(50px);
+            animation: float 10s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translate(0, 0); }
+            50% { transform: translate(20px, -20px); }
+            100% { transform: translate(0, 0); }
         }
         .hero {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background: linear-gradient(135deg, #0072ff, #00c6ff);
             text-align: center;
+            padding: 100px 20px;
+            opacity: 0;
+            animation: fadeInUp 1s forwards;
+        }
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(-20px); }
         }
         .hero h1 {
-            font-size: 2.5em;
-            margin: 0;
+            animation-delay: 0.5s;
+            animation: fadeInUp 1s forwards;
         }
         .hero p {
-            font-size: 1.2em;
-            margin: 10px 0 20px;
+            animation-delay: 1s;
+            animation: fadeInUp 1s forwards;
         }
-        .hero button {
-            background-color: #ffffff;
-            color: #121212;
-            border: none;
+        .button {
+            display: inline-block;
             padding: 10px 20px;
-            margin: 5px;
+            margin-top: 20px;
+            background: #007bff;
+            border: none;
+            color: white;
             cursor: pointer;
-            transition: background-color 0.3s;
+            border-radius: 5px;
+            animation: popIn 0.5s forwards;
         }
-        .hero button:hover {
-            background-color: #f0f0f0;
+        @keyframes popIn {
+            0% { transform: scale(0); }
+            100% { transform: scale(1); }
         }
-        .features {
-            display: flex;
-            justify-content: space-around;
-            padding: 50px 0;
+        .button:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5);
         }
         .feature-card {
-            background-color: #1e1e1e;
-            border-radius: 8px;
+            background: #444;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px;
+            transition: transform 0.3s, background 0.3s;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            background: #555;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+        }
+        .badge {
+            background: #007bff;
+            color: white;
+            border-radius: 5px;
+            padding: 5px;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        .status {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: green;
+            border-radius: 15px;
+            padding: 5px 10px;
+            color: white;
+            display: flex;
+            align-items: center;
+            animation: pulse 1s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .testimonials {
+            display: flex;
+            justify-content: space-around;
+            margin: 50px 0;
+        }
+        .testimonial-card {
+            background: #555;
+            border-radius: 10px;
             padding: 20px;
             width: 30%;
             text-align: center;
         }
-        .footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #1e1e1e;
-        }
-        @media (max-width: 768px) {
-            .features {
-                flex-direction: column;
-                align-items: center;
-            }
-            .feature-card {
-                width: 80%;
-                margin-bottom: 20px;
-            }
+        .avatar {
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            background: #007bff;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
         }
     </style>
 </head>
 <body>
-    <div class="navbar">
-        <div class="logo">Uktics</div>
-        <div>
-            <a href="#features">Features</a>
-            <a href="#pricing">Pricing</a>
-            <a href="#docs">Docs</a>
-            <a href="#login">Login</a>
-        </div>
-    </div>
+    <div class="grid"></div>
+    <div class="blob" style="top: 20%; left: 30%; width: 100px; height: 100px;"></div>
+    <div class="blob" style="top: 50%; left: 70%; width: 150px; height: 150px;"></div>
+    <div class="blob" style="top: 80%; left: 20%; width: 120px; height: 120px;"></div>
     <div class="hero">
-        <h1>Ship Code Faster with AI Orchestration</h1>
-        <p>Uktics automates pull requests, risk analysis, and CI fixes.</p>
-        <button>Try Orchestrate</button>
-        <button>View Runs</button>
+        <h1>Welcome to Our Service</h1>
+        <p>Your solution for orchestrating tasks seamlessly.</p>
+        <button class="button">Get Started</button>
     </div>
-    <div class="features" id="features">
+    <div class="status">API: Online <span style="width: 10px; height: 10px; background: green; border-radius: 50%; display: inline-block; animation: pulse 1s infinite;"></span></div>
+    <div class="features">
         <div class="feature-card">
-            <h2>AI Planner</h2>
-            <p>Plan your projects with AI-driven insights.</p>
+            <div class="badge">CORE</div>
+            <h3>Feature 1</h3>
+            <p>Description of feature 1.</p>
         </div>
         <div class="feature-card">
-            <h2>Risk Engine</h2>
-            <p>Identify and mitigate risks in your code.</p>
+            <div class="badge">CORE</div>
+            <h3>Feature 2</h3>
+            <p>Description of feature 2.</p>
         </div>
         <div class="feature-card">
-            <h2>Auto-Heal CI</h2>
-            <p>Automatically fix CI issues as they arise.</p>
+            <div class="badge">CORE</div>
+            <h3>Feature 3</h3>
+            <p>Description of feature 3.</p>
         </div>
     </div>
-    <div class="footer">
-        © 2026 Uktics. All rights reserved.
+    <div class="how-it-works">
+        <h2>How it Works</h2>
+        <ol>
+            <li>Connect GitHub</li>
+            <li>Orchestrate a task</li>
+            <li>Review + Apply safely</li>
+        </ol>
+    </div>
+    <div class="testimonials">
+        <div class="testimonial-card">
+            <div class="avatar">UB</div>
+            <p>Great service, highly recommend!</p>
+        </div>
+        <div class="testimonial-card">
+            <div class="avatar">RK</div>
+            <p>Very useful for my projects.</p>
+        </div>
+        <div class="testimonial-card">
+            <div class="avatar">JD</div>
+            <p>Excellent support and features.</p>
+        </div>
     </div>
 </body>
 </html>
