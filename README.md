@@ -1,1 +1,1 @@
-# ukticsupgradebyuktics
+<!-- uktics bundle smoke test -->
