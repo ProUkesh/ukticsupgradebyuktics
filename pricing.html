@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Login</title>
-  <meta name="description" content="Login page." />
+  <title>Pricing</title>
+  <meta name="description" content="Pricing page." />
   <style>
     :root {
       color-scheme: light dark;
@@ -326,83 +326,54 @@
   <div class="shell">
     <nav class="nav" aria-label="Primary navigation">
       <a href="index.html">Index</a>
+      <a href="login.html">Login</a>
       <a href="about.html">About</a>
       <a href="success.html">Success</a>
-      <a href="pricing.html">Pricing</a>
     </nav>
     <main>
 
-        <div class="auth-layout">
-          <div class="auth-copy">
-            <p class="eyebrow">Login</p>
-            <h1 id="page-title">Welcome back</h1>
-            <p>Sign in to continue to your Uktics workspace.</p>
-            <div class="auth-pills" aria-label="Authentication highlights">
-              <span>Static demo auth</span>
-              <span>Admin preview</span>
-              <span>Responsive UI</span>
-            </div>
-          </div>
-
-          <form class="auth-card" id="login-form" novalidate>
-            
-
-            <label for="username">
-              Username
-              <input id="username" name="username" type="text" autocomplete="username" value="" required />
-            </label>
-
-            <label for="password">
-              Password
-              <input id="password" name="password" type="password" autocomplete="current-password" value="" required />
-            </label>
-
-            
-            <div class="auth-row">
-              <label class="checkbox-label" for="remember">
-                <input id="remember" name="remember" type="checkbox" />
-                Remember me
-              </label>
-              <a href="index.html">Back home</a>
-            </div>
-
-            <p class="auth-error" id="auth-error" role="alert" aria-live="polite"></p>
-            <button class="button full" type="submit">Sign in</button>
-            <p class="auth-footer">Don&apos;t have an account? <a href="signup.html">Create one</a></p>
-          </form>
+      <section class="card" aria-labelledby="page-title">
+        <p class="eyebrow">Pricing</p>
+        <h1 id="page-title">Pricing</h1>
+        <p>Compare transparent Uktics plans for safe automated pull requests, review workflows, and production-ready code changes.</p>
+        
+        <div class="pricing-grid" aria-label="Pricing plans">
+          <article class="price-card">
+            <p class="plan-label">Starter</p>
+            <h2>Free</h2>
+            <p>Best for testing this website with a simple entry plan.</p>
+            <ul>
+              <li>Core access</li>
+              <li>Basic support</li>
+              <li>Simple setup</li>
+            </ul>
+          </article>
+          <article class="price-card featured">
+            <p class="plan-label">Builder</p>
+            <h2>$19/mo</h2>
+            <p>For builders who need a stronger plan with more capability.</p>
+            <ul>
+              <li>Expanded access</li>
+              <li>Priority updates</li>
+              <li>Advanced workflow</li>
+            </ul>
+          </article>
+          <article class="price-card">
+            <p class="plan-label">Team</p>
+            <h2>Custom</h2>
+            <p>For teams that need a tailored setup and support.</p>
+            <ul>
+              <li>Team access</li>
+              <li>Custom onboarding</li>
+              <li>Dedicated guidance</li>
+            </ul>
+          </article>
         </div>
-
-        <script>
-          (function () {
-            var form = document.getElementById('login-form');
-            if (!form) return;
-
-            form.addEventListener('submit', function (event) {
-              event.preventDefault();
-
-              var username = document.getElementById('username');
-              var password = document.getElementById('password');
-              var error = document.getElementById('auth-error');
-
-              var expectedUsername = 'admin';
-              var expectedPassword = 'admin';
-
-              if (
-                username &&
-                password &&
-                username.value.trim() === expectedUsername &&
-                password.value === expectedPassword
-              ) {
-                window.location.href = 'success.html';
-                return;
-              }
-
-              if (error) {
-                error.textContent = 'Invalid username or password.';
-              }
-            });
-          })();
-        </script>
+        <div class="actions">
+          <a class="button" href="index.html">Back Home</a>
+          <a class="button secondary" href="contact.html">Talk to us</a>
+        </div>
+      </section>
     </main>
   </div>
 </body>
