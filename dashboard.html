@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Uktics E-Commerce SaaS Demo</title>
+    <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --text-color: #ffffff;
+            --primary-color: #00ff00;
+            --secondary-color: #ff00ff;
+            --card-bg: rgba(255, 255, 255, 0.1);
+            --glow: rgba(0, 255, 0, 0.5);
+            --hover-glow: rgba(0, 255, 0, 1);
+            --border-glow: rgba(0, 255, 0, 0.3);
+        }
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        nav a {
+            color: var(--text-color);
+            margin: 0 1rem;
+            text-decoration: none;
+        }
+        .dashboard-container {
+            padding: 2rem;
+        }
+        .card {
+            background: var(--card-bg);
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+            box-shadow: 0 0 10px var(--glow);
+        }
+        .card h3 {
+            margin: 0 0 1rem;
+        }
+        .card p {
+            margin: 0.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div>Uktics</div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="products.html">Products</a>
+            <a href="cart.html">Cart</a>
+            <a href="checkout.html">Checkout</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="login.html">Login</a>
+            <a href="pricing.html">Pricing</a>
+        </nav>
+    </header>
+    <main class="dashboard-container">
+        <h1>Admin Dashboard</h1>
+        <div class="card">
+            <h3>Revenue</h3>
+            <p>Total Revenue: $5000</p>
+        </div>
+        <div class="card">
+            <h3>Orders</h3>
+            <p>Total Orders: 150</p>
+        </div>
+        <div class="card">
+            <h3>Customers</h3>
+            <p>Total Customers: 120</p>
+        </div>
+        <div class="card">
+            <h3>Conversion Rate</h3>
+            <p>Conversion Rate: 3.5%</p>
+        </div>
+        <div class="card">
+            <h3>Recent Orders</h3>
+            <p>Order #12345 - $30</p>
+            <p>Order #12346 - $20</p>
+            <p>Order #12347 - $50</p>
+        </div>
+        <div class="card">
+            <h3>Inventory</h3>
+            <p>Products in Stock: 200</p>
+        </div>
+        <div class="card">
+            <h3>Quick Links</h3>
+            <p><a href="products.html">View Products</a></p>
+            <p><a href="cart.html">View Cart</a></p>
+            <p><a href="checkout.html">Checkout</a></p>
+        </div>
+    </main>
+</body>
+</html>

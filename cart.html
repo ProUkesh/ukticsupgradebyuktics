@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart - Uktics E-Commerce SaaS Demo</title>
+    <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --text-color: #ffffff;
+            --primary-color: #00ff00;
+            --secondary-color: #ff00ff;
+            --card-bg: rgba(255, 255, 255, 0.1);
+            --glow: rgba(0, 255, 0, 0.5);
+            --hover-glow: rgba(0, 255, 0, 1);
+            --border-glow: rgba(0, 255, 0, 0.3);
+        }
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        nav a {
+            color: var(--text-color);
+            margin: 0 1rem;
+            text-decoration: none;
+        }
+        .cart-container {
+            padding: 2rem;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem;
+            background: var(--card-bg);
+            margin: 1rem 0;
+            border-radius: 5px;
+        }
+        .cart-item button {
+            background: var(--primary-color);
+            border: none;
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .cart-item button:hover {
+            box-shadow: 0 0 10px var(--hover-glow);
+        }
+        .empty-cart {
+            text-align: center;
+            padding: 2rem;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div>Uktics</div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="products.html">Products</a>
+            <a href="cart.html">Cart</a>
+            <a href="checkout.html">Checkout</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="login.html">Login</a>
+            <a href="pricing.html">Pricing</a>
+        </nav>
+    </header>
+    <main class="cart-container">
+        <h1>Your Cart</h1>
+        <div id="cart-items"></div>
+        <div id="cart-total"></div>
+        <button id="checkout-button">Proceed to Checkout</button>
+    </main>
+    <script>
+        function updateCart() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            const cartTotalContainer = document.getElementById('cart-total');
+            const cart = JSON.parse(localStorage.getItem('uktics_demo_cart')) || [];
+            cartItemsContainer.innerHTML = '';
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<div class="empty-cart">Your cart is empty.</div>';
+                cartTotalContainer.innerHTML = '';
+                return;
+            }
+            let total = 0;
+            cart.forEach(item => {
+                const itemPrice = parseInt(item) * 10; // Assuming each product has a price of $10
+                total += itemPrice;
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `<span>Product ${item}</span> <span>$${itemPrice}</span> <button onclick="removeFromCart(${item})">Remove</button>`;
+                cartItemsContainer.appendChild(cartItem);
+            });
+            cartTotalContainer.innerHTML = `<h2>Total: $${total}</h2>`;
+        }
+
+        function removeFromCart(productId) {
+            let cart = JSON.parse(localStorage.getItem('uktics_demo_cart')) || [];
+            cart = cart.filter(item => item != productId);
+            localStorage.setItem('uktics_demo_cart', JSON.stringify(cart));
+            updateCart();
+        }
+
+        document.getElementById('checkout-button').addEventListener('click', () => {
+            window.location.href = 'checkout.html';
+        });
+
+        updateCart();
+    </script>
+</body>
+</html>
