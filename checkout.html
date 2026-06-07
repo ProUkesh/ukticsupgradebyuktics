@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Uktics E-Commerce SaaS Demo</title>
+    <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --text-color: #ffffff;
+            --primary-color: #00ff00;
+            --secondary-color: #ff00ff;
+            --card-bg: rgba(255, 255, 255, 0.1);
+            --glow: rgba(0, 255, 0, 0.5);
+            --hover-glow: rgba(0, 255, 0, 1);
+            --border-glow: rgba(0, 255, 0, 0.3);
+        }
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        nav a {
+            color: var(--text-color);
+            margin: 0 1rem;
+            text-decoration: none;
+        }
+        .checkout-container {
+            padding: 2rem;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .order-summary {
+            margin-top: 2rem;
+            background: var(--card-bg);
+            padding: 1rem;
+            border-radius: 5px;
+        }
+        .order-summary h2 {
+            margin: 0 0 1rem;
+        }
+        .order-summary p {
+            margin: 0.5rem 0;
+        }
+        .success-message {
+            display: none;
+            background: var(--primary-color);
+            padding: 1rem;
+            border-radius: 5px;
+            margin-top: 2rem;
+        }
+        .empty-cart {
+            text-align: center;
+            padding: 2rem;
+            font-size: 1.5rem;
+        }
+        button {
+            background: var(--primary-color);
+            border: none;
+            color: #000;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        button:hover {
+            box-shadow: 0 0 10px var(--hover-glow);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div>Uktics</div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="products.html">Products</a>
+            <a href="cart.html">Cart</a>
+            <a href="checkout.html">Checkout</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="login.html">Login</a>
+            <a href="pricing.html">Pricing</a>
+        </nav>
+    </header>
+    <main class="checkout-container">
+        <h1>Checkout</h1>
+        <div id="cart-summary"></div>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" required>
+        </div>
+        <div class="form-group">
+            <label for="address">Address</label>
+            <input type="text" id="address" required>
+        </div>
+        <div class="form-group">
+            <label for="city">City</label>
+            <input type="text" id="city" required>
+        </div>
+        <div class="form-group">
+            <label for="notes">Notes</label>
+            <input type="text" id="notes">
+        </div>
+        <button id="place-order">Place Demo Order</button>
+        <div class="order-summary">
+            <h2>Order Summary</h2>
+            <p id="subtotal"></p>
+            <p id="estimated-tax"></p>
+            <p id="total"></p>
+        </div>
+        <div class="success-message" id="success-message">
+            <p>Thank you for your order! Your demo order has been placed successfully.</p>
+        </div>
+        <div class="empty-cart" id="empty-cart" style="display: none;">
+            <p>Your cart is empty. <a href="products.html">Go back to products.</a></p>
+        </div>
+    </main>
+    <script>
+        function updateOrderSummary() {
+            const cart = JSON.parse(localStorage.getItem('uktics_demo_cart')) || [];
+            const subtotalElement = document.getElementById('subtotal');
+            const estimatedTaxElement = document.getElementById('estimated-tax');
+            const totalElement = document.getElementById('total');
+            const cartSummaryElement = document.getElementById('cart-summary');
+            const emptyCartElement = document.getElementById('empty-cart');
+            if (cart.length === 0) {
+                cartSummaryElement.style.display = 'none';
+                emptyCartElement.style.display = 'block';
+                return;
+            }
+            cartSummaryElement.style.display = 'block';
+            emptyCartElement.style.display = 'none';
+            let subtotal = 0;
+            cart.forEach(item => {
+                const itemPrice = parseInt(item) * 10;
+                subtotal += itemPrice;
+                cartSummaryElement.innerHTML += `<p>Product ${item}: $${itemPrice}</p>`;
+            });
+            const estimatedTax = subtotal * 0.1;
+            const total = subtotal + estimatedTax;
+            subtotalElement.innerText = `Subtotal: $${subtotal}`;
+            estimatedTaxElement.innerText = `Estimated Tax: $${estimatedTax.toFixed(2)}`;
+            totalElement.innerText = `Total: $${total.toFixed(2)}`;
+        }
+
+        document.getElementById('place-order').addEventListener('click', () => {
+            const cart = JSON.parse(localStorage.getItem('uktics_demo_cart')) || [];
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+            document.getElementById('success-message').style.display = 'block';
+            localStorage.removeItem('uktics_demo_cart');
+            updateOrderSummary();
+        });
+
+        updateOrderSummary();
+    </script>
+</body>
+</html>
